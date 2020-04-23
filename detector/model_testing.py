@@ -61,7 +61,7 @@ for r, d, f in os.walk(path):
 '''
 Evaluating each file ans saving the result for ham files
 '''
-for key, value in dictHamTestFiles.items():
+for key, value in sorted(dictHamTestFiles.items()):
     hamProbability = 0
     spamProbability = 0
     for v in value:
@@ -70,6 +70,7 @@ for key, value in dictHamTestFiles.items():
         if v in modelValueSpamDict:
             spamProbability += math.log10(float(str(modelValueSpamDict.get(v))))
     result.write(str(counter) + "  " + str(key) + "  ")
+    counter += 1
     if hamProbability > spamProbability:
         correctHamCount += 1
         hamCorrect += 1
@@ -81,7 +82,7 @@ for key, value in dictHamTestFiles.items():
 '''
 Evaluating each file ans saving the result for spam files
 '''
-for key, value in dictSpamTestFiles.items():
+for key, value in sorted(dictSpamTestFiles.items()):
     hamProbability = 0
     spamProbability = 0
     for v in value:
@@ -90,6 +91,7 @@ for key, value in dictSpamTestFiles.items():
         if v in modelValueSpamDict:
             spamProbability += math.log10(float(str(modelValueSpamDict.get(v))))
     result.write(str(counter) + "  " + str(key) + "  ")
+    counter += 1
     if spamProbability > hamProbability:
         correctSpamCount += 1
         spamCorrect += 1
@@ -102,23 +104,22 @@ result.close()
 print("\nResult File Created\n")
 
 '''
-Confusion Matrix - HAM
+Confusion Matrix
 '''
 print("CONFUSION MATRIX\n")
 print("          " + "HAM   " + "   SPAM   ")
 print("HAM   |   " + str(hamCorrect) + "   |   " + str(hamNotCorrect))
-print("SPAM  |   " + str(spamCorrect) + "   |   " + str(spamNotCorrect))
+print("SPAM  |   " + str(spamNotCorrect) + "   |   " + str(spamCorrect))
 
-print("\nHAM ACCURACY  - " + str(hamCorrect/(hamCorrect+hamNotCorrect)))
-print("SPAM ACCURACY - " + str(spamCorrect/(spamCorrect+spamNotCorrect)))
+print("\nACCURACY  - " + str((hamCorrect+spamCorrect)/(hamCorrect+hamNotCorrect+spamNotCorrect+spamCorrect)))
 
 hamRecall = hamCorrect / (hamCorrect + hamNotCorrect)
 spamRecall = spamCorrect / (spamCorrect + spamNotCorrect)
 print("\nHAM RECALL  - " + str(hamRecall))
 print("SPAM RECALL - " + str(spamRecall))
 
-hamPrecision = hamCorrect / (hamCorrect + spamCorrect)
-spamPrecision = spamCorrect / (spamCorrect + hamCorrect)
+hamPrecision = hamCorrect / (hamCorrect + spamNotCorrect)
+spamPrecision = spamCorrect / (spamCorrect + hamNotCorrect)
 print("\nHAM PRECISION  - " + str(hamPrecision))
 print("SPAM PRECISION - " + str(spamPrecision))
 
