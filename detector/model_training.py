@@ -2,8 +2,6 @@ import os
 import re
 from collections import Counter
 
-path = '/Users/shalin_patel/Desktop/Artificial Intelligence/Project/Project2/SpamDetector/train'
-
 files = []
 
 hamTrainFiles = []
@@ -29,19 +27,18 @@ priorProbabilitySpam = 0
 
 wordList = []
 
-for r, d, f in os.walk(path):
+for r, d, f in os.walk("train"):
     for file in f:
         if '.txt' in file:
-            files.append(os.path.join(r, file))
             if '-ham-' in file:
                 hamTrainFiles.append(file)
-                content = open(path + "/" + file, 'r', encoding="ISO-8859-1").read()
+                content = open("train/" + file, 'r', encoding="ISO-8859-1").read()
                 fileTokens = re.split('[^a-zA-Z]', content.lower())
                 fileTokens = list(filter(lambda a: a != '', fileTokens))  # removing of blank spaces
                 dictHamTrainFiles[file] = fileTokens
             else:
                 spamTrainFiles.append(file)
-                content = open(path + "/" + file, 'r', encoding="ISO-8859-1").read()
+                content = open("train/" + file, 'r', encoding="ISO-8859-1").read()
                 fileTokens = re.split('[^a-zA-Z]', content.lower())
                 fileTokens = list(filter(lambda a: a != '', fileTokens))  # removing of blank spaces
                 dictSpamTrainFiles[file] = fileTokens

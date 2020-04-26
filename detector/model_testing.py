@@ -16,8 +16,6 @@ for line in modelLines:
     modelValueHamDict[modelValueLine[1]] = modelValueLine[3]
     modelValueSpamDict[modelValueLine[1]] = modelValueLine[5]
 
-path = '/Users/shalin_patel/Desktop/Artificial Intelligence/Project/Project2/SpamDetector/test'
-
 files = []
 
 hamTestFiles = []
@@ -41,19 +39,18 @@ spamNotCorrect = 0
 '''
 Reading all the test files and string the tokens in dict
 '''
-for r, d, f in os.walk(path):
+for r, d, f in os.walk("test"):
     for file in f:
         if '.txt' in file:
-            files.append(os.path.join(r, file))
             if '-ham-' in file:
                 hamTestFiles.append(file)
-                content = open(path + "/" + file, 'r', encoding="ISO-8859-1").read()
+                content = open("test/" + file, 'r', encoding="ISO-8859-1").read()
                 fileTokens = re.split('[^a-zA-Z]', content.lower())
                 fileTokens = list(filter(lambda a: a != '', fileTokens))  # removing of blank spaces
                 dictHamTestFiles[file] = fileTokens
             else:
                 spamTestFiles.append(file)
-                content = open(path + "/" + file, 'r', encoding="ISO-8859-1").read()
+                content = open("test/" + file, 'r', encoding="ISO-8859-1").read()
                 fileTokens = re.split('[^a-zA-Z]', content.lower())
                 fileTokens = list(filter(lambda a: a != '', fileTokens))  # removing of blank spaces
                 dictSpamTestFiles[file] = fileTokens
@@ -109,7 +106,7 @@ Confusion Matrix
 print("CONFUSION MATRIX\n")
 print("          " + "HAM   " + "   SPAM   ")
 print("HAM   |   " + str(hamCorrect) + "   |   " + str(hamNotCorrect))
-print("SPAM  |   " + str(spamNotCorrect) + "   |   " + str(spamCorrect))
+print("SPAM  |   " + str(spamNotCorrect) + "    |   " + str(spamCorrect))
 
 print("\nACCURACY  - " + str((hamCorrect+spamCorrect)/(hamCorrect+hamNotCorrect+spamNotCorrect+spamCorrect)))
 
