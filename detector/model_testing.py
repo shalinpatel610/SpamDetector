@@ -103,10 +103,10 @@ print("\nResult File Created\n")
 '''
 Confusion Matrix
 '''
-print("CONFUSION MATRIX\n")
-print("          " + "HAM   " + "   SPAM   ")
-print("HAM   |   " + str(hamCorrect) + "   |   " + str(hamNotCorrect))
-print("SPAM  |   " + str(spamNotCorrect) + "    |   " + str(spamCorrect))
+print("CONFUSION MATRIX \n(A) - ACTUAL (P) - PRECISION\n")
+print("            " + "HAM (P)" + "   SPAM (P)")
+print("HAM  (A)  |   " + str(hamCorrect) + "   |   " + str(hamNotCorrect))
+print("SPAM (A)  |   " + str(spamNotCorrect) + "    |   " + str(spamCorrect))
 
 print("\nACCURACY  - " + str((hamCorrect+spamCorrect)/(hamCorrect+hamNotCorrect+spamNotCorrect+spamCorrect)))
 
