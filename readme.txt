@@ -18,4 +18,4 @@ Running the code (Requirement python 3+)
 
     - Testing the model
         - run "model_testing.py"
-        - result.txt will be generated in the same folder
+        - result.txt will be generated in the same folder and model evaluation will be print in console
